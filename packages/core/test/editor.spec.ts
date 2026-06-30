@@ -31,6 +31,7 @@ describe("Editor", () => {
             category: "default",
             title: "TestNode",
             type: TestNode,
+            hidden: false,
         });
         expect(ev).toHaveBeenCalled();
     });
@@ -45,6 +46,18 @@ describe("Editor", () => {
             type: TestNode,
             category: "category",
             title: "title",
+            hidden: false,
+        });
+    });
+
+    it("can register a hidden node type", () => {
+        const e = new Editor();
+        e.registerNodeType(TestNode, { hidden: true });
+        expect(e.nodeTypes.get("TestNode")).toEqual({
+            type: TestNode,
+            category: "default",
+            title: "TestNode",
+            hidden: true,
         });
     });
 

@@ -102,6 +102,7 @@ export class Editor implements IBaklavaEventEmitter, IBaklavaTapable {
             type,
             category: options?.category ?? "default",
             title: options?.title ?? nodeInstance.title,
+            hidden: options?.hidden ?? false,
         });
         this.events.registerNodeType.emit({ type, options });
     }

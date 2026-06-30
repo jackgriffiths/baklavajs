@@ -44,6 +44,9 @@ export function useNodeCategories(viewModel: Ref<IBaklavaViewModel>) {
         for (const c of categoryNames.values()) {
             let nodeTypesInCategory = nodeTypeEntries.filter(([, ni]) => ni.category === c);
 
+            // hide nodes explicitly marked as hidden (e.g. deprecated nodes kept for backwards compat)
+            nodeTypesInCategory = nodeTypesInCategory.filter(([, ni]) => !ni.hidden);
+
             if (viewModel.value.displayedGraph.template) {
                 // don't show the graph nodes that directly or indirectly contain the current subgraph to prevent recursion
                 nodeTypesInCategory = nodeTypesInCategory.filter(
